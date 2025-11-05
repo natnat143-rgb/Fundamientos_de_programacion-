@@ -26,6 +26,7 @@ class Universidad:
         self.carreras = [] #Aqui, carrera es una lista
         self.alumnos = [] #Al igual que alumnos. (List)
         self.profesores = [] #Y profesores. (List)
+        self.ubicacion = "Pabellón"  #Nuevo atributo Str(Varchar)
 
     # ------------------- Gestión de carreras -------------------
     def agregar_carrera(self, carrera):
@@ -49,6 +50,7 @@ class Carrera:
     def __init__(self, nombre: str):
         self.nombre = nombre #El atributo nombre es Str(Varchar)
         self.materias = [] #Lista de objetos Materia
+        self.duracion = 4  #Nuevo atributo tipo int
 
     def agregar_materia(self, materia):
         self.materias.append(materia)
@@ -68,15 +70,17 @@ class Materia:
         self.nombre = nombre #El atributo nombre es Str(Varchar)
         self.carrera = carrera #Carrera es un objeto               # Instancia de Carrera
         self.calificacion_final = calificacion_final #El atributo de calificacion_final es float (Por las calif. en decimal)
+        self.creditos = 6  #Nuevo atributo tipo int
 
     def __repr__(self):
         return f'Materia("{self.nombre}", carrera="{self.carrera.nombre}")'
 
 
 class Profesor:
-    def __init__(self, nombre: str, materia: Materia):
+    def __init__(self, nombre: str, materia: Materia, edad:int):
         self.nombre = nombre #El atributo nombre es Str(Varchar)
         self.materia = materia #Aqui, materia es un objeto porque el profe la imparte.  # Materia que imparte
+        self.edad = edad  #Nuevo atributo tipo int
 
     def registra_calificacion(self, alumno: Alumno, calificacion: float):
         alumno.calificaciones[self.materia.nombre] = calificacion
@@ -84,7 +88,7 @@ class Profesor:
               f'{self.materia.nombre}: {calificacion}')
 
     def __repr__(self):
-        return f'Profesor("{self.nombre}", {self.materia})'
+        return f'Profesor("{self.nombre}", {self.materia}, edad={self.edad})'
 
 
 if __name__ == "__main__":
@@ -114,8 +118,8 @@ if __name__ == "__main__":
     uni.agregar_alumno(juan)
     uni.agregar_alumno(luisa)
 
-    prof_garcia = Profesor("Dr. García", calc)
-    prof_rodriguez = Profesor("Mtra. Rodríguez", fis)
+    prof_garcia = Profesor("Dr. García", calc, edad=45)
+    prof_rodriguez = Profesor("Mtra. Rodríguez", fis, edad=35)
 
     uni.agregar_profesor(prof_garcia)
     uni.agregar_profesor(prof_rodriguez)
